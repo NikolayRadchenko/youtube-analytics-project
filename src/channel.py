@@ -1,7 +1,6 @@
 import json
 import os
 
-import requests
 from googleapiclient.discovery import build
 
 api_key: str = os.getenv('YT_API_KEY')
@@ -21,27 +20,6 @@ class Channel:
         self.__subscriber_count = int(self.channel["items"][0]["statistics"]["subscriberCount"])
         self.__video_count = int(self.channel["items"][0]["statistics"]["videoCount"])
         self.__view_count = int(self.channel["items"][0]["statistics"]["viewCount"])
-
-    def __str__(self):
-        return f'{self.title} ({self.url})'
-
-    def __add__(self, other):
-        return self.subscriber_count + other.subscriber_count
-
-    def __sub__(self, other):
-        return self.subscriber_count - other.subscriber_count
-
-    def __it__(self, other):
-        return self.subscriber_count < other.subscriber_count
-
-    def __le__(self, other):
-        return self.subscriber_count <= other.subscriber_count
-
-    def __gt__(self, other):
-        return self.subscriber_count > other.subscriber_count
-
-    def __ge__(self, other):
-        return self.subscriber_count >= other.subscriber_count
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
