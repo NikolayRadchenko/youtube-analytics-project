@@ -88,3 +88,4 @@ class Channel:
 
     def requests(self):
         print(self.channel.response.request.url)
+
