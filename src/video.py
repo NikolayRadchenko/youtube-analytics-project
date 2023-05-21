@@ -63,13 +63,13 @@ class Video:
 
 
 class PLVideo(Video):
-    def __init__(self, video_id: str, channel_id: str):
+    def __init__(self, video_id: str, play_list_id: str):
         super().__init__(video_id)
-        self.__channel_id = channel_id
+        self.__play_list_id = play_list_id
 
     def __str__(self):
         return f'{self.title}'
 
     @property
-    def channel_id(self):
-        return self.__channel_id
+    def play_list_id(self):
+        return self.__play_list_id
