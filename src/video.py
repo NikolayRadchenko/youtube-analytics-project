@@ -8,16 +8,20 @@ api_key: str = os.getenv('YT_API_KEY')
 
 class Video:
     def __init__(self, video_id: str) -> None:
-        self.__video_id = video_id
-        self.__key_api = api_key
-        self.__video = self.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
-                                                        id=self.video_id
-                                                        ).execute()
-        self.__title: str = self.video['items'][0]['snippet']['title']
-        self.__url = f"https://youtu.be/{self.video_id}"
-        self.__view_count: int = self.video['items'][0]['statistics']['viewCount']
-        self.__like_count: int = self.video['items'][0]['statistics']['likeCount']
-        self.__comment_count: int = self.video['items'][0]['statistics']['commentCount']
+        try:
+            self.__video_id = video_id
+            self.__key_api = api_key
+            self.__video = self.get_service().videos().list(part='snippet,statistics,contentDetails,topicDetails',
+                                                            id=self.video_id
+                                                            ).execute()
+            self.__title: str = self.video['items'][0]['snippet']['title']
+        except IndexError:
+            print('Введен некорректный id')
+            self.__title = None
+            self.__url = None
+            self.__view_count = None
+            self.__like_count = None
+            self.__comment_count = None
 
     def __str__(self):
         return f'{self.title}'
