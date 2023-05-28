@@ -15,6 +15,9 @@ class Video:
                                                             id=self.video_id
                                                             ).execute()
             self.__title: str = self.video['items'][0]['snippet']['title']
+            self.__url = f"https://youtu.be/{self.video['items'][0]['id']}"
+            self.__view_count = self.video['items'][0]['statistics']['viewCount']
+            self.__like_count = self.video['items'][0]['statistics']['likeCount']
         except IndexError:
             print('Введен некорректный id')
             self.__title = None
